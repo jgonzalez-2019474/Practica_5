@@ -14,7 +14,7 @@ int Buzzer = 5;
 int DO = 261;
 int RE = 294;
 int MI = 329;
-int DORE = 349;
+int SI = 349;
 int SOL = 392;
 int LA = 440;
 
@@ -31,18 +31,28 @@ void loop() {
   distancia = calcularDistancia(duracion);
 
   if (distancia > 0 && distancia <= 5) {
-    reproducirTono(Buzzer, DO, 500);
-  } else if (distancia > 5 && distancia <= 10) {
+    reproducirTono(Buzzer, SI, 500);
+    
+  }
+  else if (distancia > 5 && distancia <= 10) {
+    reproducirTono(Buzzer, LA, 500);  
+  }
+  else if (distancia > 10 && distancia <= 15) {
+    reproducirTono(Buzzer, SOL, 350); 
+  }
+  else if (distancia > 15 && distancia <= 20) {
+    reproducirTono(Buzzer, MI, 150);
+  }
+  
+  else if (distancia > 20 && distancia <= 25) {
     reproducirTono(Buzzer, RE, 500);
-  } else if (distancia > 10 && distancia <= 15) {
-    reproducirTono(Buzzer, MI, 350);
-  } else if (distancia > 15 && distancia <= 20) {
-    reproducirTono(Buzzer, DORE, 150);
-  } else if (distancia > 20 && distancia <= 25) {
-    reproducirTono(Buzzer, SOL, 500);
-  } else if (distancia > 25 && distancia <= 30) {
-    reproducirTono(Buzzer, LA, 350);
-  } else {
+  }
+  
+  else if (distancia > 25 && distancia <= 30) {
+    reproducirTono(Buzzer, DO, 350);
+  } 
+  
+  else {
     detenerTono(Buzzer);
   }
 
@@ -51,9 +61,9 @@ void loop() {
 
 long medirDuracionPulso() {
   digitalWrite(trig, LOW);
-  delayMicroseconds(2);
+  delay(2);
   digitalWrite(trig, HIGH);
-  delayMicroseconds(10);
+  delay(10);
   digitalWrite(trig, LOW);
   return pulseIn(echo, HIGH);
 }
